@@ -1,0 +1,17 @@
+---
+- name: Install postgresql
+  package:
+    name: "postgresql"
+    state: present
+
+- name: Install postgresql-contrib
+  package:
+    name: "postgresql-contrib"
+    state: present
+
+- name: Start postgresql service
+  systemd:
+    name: postgresql.service
+    daemon_reload: yes
+    state: started
+    enabled: yes
