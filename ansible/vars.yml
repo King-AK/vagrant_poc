@@ -1,1 +1,2 @@
 host: ansible_default_ipv4.address
+allow_world_readable_tmpfiles: true
