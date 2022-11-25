@@ -1,0 +1,16 @@
+- name: Ensure group 'developers' exists
+  group:
+    name: developers
+    state: present
+
+- name: Create the user 'poc'
+  user:
+    name: poc
+    shell: /bin/bash
+    password: $6$2y9E/jVQLV7$U3Tt0n.3rmbXe4qbrmljUR3jQQKefM0wRPQc7mbS2RNXpJ0xg.hqCioUvCdTiAXOHXjxFB3vnMeWSQAYT.9t/0
+
+- name: Assign 'poc' to the 'developers' group
+  user:
+    name: poc
+    groups: developers
+    append: yes

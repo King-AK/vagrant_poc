@@ -1,0 +1,8 @@
+app_metrics
+.vscode
+.vagrant/
+*.log
+.DS_Store
+*.bak
+*.tool-versions
+venv
