@@ -14,3 +14,7 @@ source ./venv/bin/activate
 pip install -r requirements.txt
 ```
 * `cd` into `vagrant` directory, run `vagrant up`
+* To delete the vm run `vagrant destroy`
+
+TODO:
+ADO Pipeline with Junit and Visualization
