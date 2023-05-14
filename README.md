@@ -7,10 +7,10 @@ Steps:
 ```bash
 bash setup/install_virtualbox_and_vagrant.sh
 ```
-* Create a python3.9+ virtual environment
-* Use pip to install `ansible`, `psycopg2-binary`
-* Install the `ansible-galaxy` `community.postgresql` module
+* Set up and configure python venv, use pip to install ansible requirements
 ```bash
-ansible-galaxy collection install community.postgresql
+python3 -m venv ./venv
+source ./venv/bin/activate
+pip install -r requirements.txt
 ```
 * `cd` into `vagrant` directory, run `vagrant up`
