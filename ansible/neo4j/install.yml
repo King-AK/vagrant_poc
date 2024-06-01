@@ -1,0 +1,56 @@
+---
+- name: Install neo4j dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - wget
+    - curl
+    - nano
+    - software-properties-common
+    - dirmngr
+    - apt-transport-https
+    - gnupg
+    - gnupg2
+    - ca-certificates
+    - lsb-release
+    - ubuntu-keyring
+    - unzip
+
+- name: Add Neo4j GPG key
+  shell: curl -fsSL https://debian.neo4j.com/neotechnology.gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/neo4j.gpg
+
+- name: Add Neo4j repository
+  shell: echo "deb [signed-by=/usr/share/keyrings/neo4j.gpg] https://debian.neo4j.com stable latest" | sudo tee -a /etc/apt/sources.list.d/neo4j.list
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install neo4j
+  package:
+    name: "neo4j"
+    state: present
+
+
+- name: Change port configuration for neo4j http connector
+  ansible.builtin.replace:
+    path: /etc/neo4j/neo4j.conf
+    regexp: '#server.http.listen_address=:7474'
+    replace: 'server.http.listen_address=0.0.0.0:7474'
+
+- name: Change port configuration for neo4j bolt connector
+  ansible.builtin.replace:
+    path: /etc/neo4j/neo4j.conf
+    regexp: '#server.bolt.listen_address=:7687'
+    replace: 'server.bolt.listen_address=0.0.0.0:7687'
+
+- name: Change neo4j admin password
+  shell: neo4j-admin dbms set-initial-password {{ neo4j_password }}
+
+- name: Start neo4j service
+  systemd:
+    name: neo4j.service
+    daemon_reload: yes
+    state: started
+    enabled: yes
