@@ -3,7 +3,7 @@ Dummy repo to play around with Vagrant and Ansible.
 
 Deploys an Ubuntu 22.04 VM and configures a Neo4J server.
 
-Following deploy, you may connect to the Neo4J instance from your browser at `http://ocalhost:7474` and begin to issue queries, explore data, etc.
+Following deploy, you may connect to the Neo4J instance from your browser at `http://localhost:7474` and begin to issue queries, explore data, etc.
 
 Use the credentials to log in:
 
